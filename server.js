@@ -41,7 +41,7 @@ app.use("/api/users", usersRoutes(knex));
 // knex/db communicating functions
 const userData = require("./scripts/createUserData")(knex);
 const pollData = require("./scripts/createPollData")(knex);
-
+const findPoll = require("./scripts/findPoll")(knex);
 
 
 // Generate random string function (eventually move to module)
@@ -55,9 +55,7 @@ function generateRandomString() {
 }
 
 
-
-
-// GET homepage
+// GET homepage --> no data to be sent here... just render the ejs file
 app.get("/", (req, res) => {
   res.render("index");
 });
@@ -66,48 +64,52 @@ app.get("/", (req, res) => {
 app.post("/polls", (req, res) => {
       var pollDesc = req.body.description; //send to database
       var pollQuestion = req.body.question; //send to database
-      // var pollId = generateRandomString();   id from database??
+      var pollId = generateRandomString();
       var userName = req.body.name;
-      var userEmail = req.body.email; //send to database
-      var options = ? ? ?
+      var userEmail = req.body.email;
+      var pollURL = `polls/${pollId}`
+      var adminURL = `admin/polls/${pollId}`
+       //send to database
+      var options = []??//nolan to send in an array...
         //options... how do we capture from the form? loop through each item and send to database?
         if (!userEmail) {
           res.send('You must enter an email to create a poll')
         } else {
           //how are we treating existing emails...create a function to check if it exists?
+          //function to send data to database (user table)
           userData.addUser(userEmail, userName, (err, rows) => {
               if (err) {
                 console.log("error adding user data");
               }
               console.log(`testing if user add successful: ${rows}`)
             }
-            pollData.addPoll(pollTitle, pollDesc, (err, rows) => {
+            //function to send data to database (poll table)
+            pollData.addPoll(pollTitle, pollDesc, pollURL, adminURL, (err, rows) => {
                 if (err) {
                   console.log("error adding poll data");
                 }
                 console.log(`testing if poll data add successful: ${rows}`)
               }
-              res.redirect(`/polls/${!!id!!!}`) //need ID associated with poll or generate from here?
+              res.redirect(`/polls/${PollId}`);
             })
-
-
-
+            //send email to user... should this be done on server or ajax
     })
- /// poll export function in scripts/createPollData.js (function called addPoll)
- // user export  function in scripts/createUserData.js. (function called addUser)
 
-
-
-    res.redirect(`/polls/${pollId}`)
-  }
-}
 
 // GET specific poll page
 app.get("/polls/:id", (req, res) => {
+  var pollURL = `polls/${req.params.id}`
+
 if(... check in db... !req.params.id) {
   res.send('This poll is no longer active')
 } else {
-  res.render("polls_display", !!!database info!!!)
+  findPoll.findPollDis(pollURL, (err, rows) => {
+    if (err) {
+      console.log("error finding poll data");
+    }
+    console.log(`testing if specific poll data is passed in: ${rows}`);
+// how to pass the data to the specific poll
+  })
 }
 }
 
