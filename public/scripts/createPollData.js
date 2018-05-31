@@ -1,7 +1,7 @@
 module.exports = function(knex) {
-  function addPoll(pollTitle, pollDesc, cb) {
+  function addPoll(pollTitle, pollDesc, pollURL, adminURL, cb) {
     knex('poll')
-      .insert([{"question_description": pollTitle, "description": pollDesc}]) ///associate with an id?
+      .insert([{"question_description": pollTitle, "description": pollDesc, "poll_url": pollURL, "admin_url":adminURL}])
       .then(rows =>
         cb(null, rows)
       )
