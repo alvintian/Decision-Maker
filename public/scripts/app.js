@@ -3,10 +3,37 @@ $('document').ready(function() {
 //Jquery to compile options into an object to export to database
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 let object = {};
   $('[name=Option1], [name=Option2]').on('keyup', function(e) {
       object[$(e.target)[0].name] = $(e.target).val();
-
+        e.preventDefault();
+      $(".new").on("submit").JSON.stringify(object);
     });
 
 
