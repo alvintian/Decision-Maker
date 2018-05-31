@@ -61,16 +61,15 @@ app.get("/", (req, res) => {
 
 // POST create poll
 app.post("/polls", (req, res) => {
-      var pollDesc = req.body.description; //send to database
-      var pollQuestion = req.body.question; //send to database
+      var pollDesc = req.body.description; //now being handled by Ajax
+      var pollQuestion = req.body.question; //now being handled by Ajax
       var pollId = generateRandomString();
-      var userName = req.body.name;
-      var userEmail = req.body.email;
-      var pollURL = `polls/${pollId}`
-      var adminURL = `admin/polls/${pollId}`
-       //send to database
-       //
-      var options = []??//nolan to send in an array...
+      var userName = req.body.name; //now being handled by Ajax
+      var userEmail = req.body.email; //now being handled by Ajax
+      var pollURL = `polls/${pollId}` //send to database?
+      var adminURL = `admin/polls/${pollId}` //send to database?
+
+      //nolan to send in an array...
         //options... how do we capture from the form? loop through each item and send to database?
         if (!userEmail) {
           res.send('You must enter an email to create a poll')
@@ -84,7 +83,14 @@ app.post("/polls", (req, res) => {
               console.log(`testing if user add successful: ${rows}`)
             }
             //function to send data to database (poll table)
-            pollData.addPoll(pollTitle, pollDesc, pollURL, adminURL, (err, rows) => {
+            // pollData.addPoll(pollTitle, pollDesc, pollURL, adminURL, (err, rows) => {
+            //     if (err) {
+            //       console.log("error adding poll data");
+            //     }
+            //     console.log(`testing if poll data add successful: ${rows}`)
+            //   }
+            //tweak to send just URLs?
+              pollData.addPoll(pollURL, adminURL, (err, rows) => {
                 if (err) {
                   console.log("error adding poll data");
                 }
