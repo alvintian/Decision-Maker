@@ -98,25 +98,51 @@ app.post("/polls", (req, res) => {
 
 // GET specific poll page
 app.get("/polls/:id", (req, res) => {
-  var pollURL = `polls/${req.params.id}`
+  var pollURL = `polls/${req.params.id}`;
 
-if(... check in db... !req.params.id) {
+if(...would be if the select query comes to nothing...) {
   res.send('This poll is no longer active')
 } else {
   findPoll.findPollDis(pollURL, (err, rows) => {
     if (err) {
       console.log("error finding poll data");
+      //should we put our error send here if we cannot find the url?
     }
     console.log(`testing if specific poll data is passed in: ${rows}`);
-// how to pass the data to the specific poll
+// how to pass the data to the specific poll???
   })
 }
 }
 
-//GET admin poll page
+//GET admin specific poll page
+app.get("/admin/polls/:id"), (req, res) => {
+var adminURL = `admin/polls/${req.params.id}`;
+
+if(...would be if the select query comes to nothing...) {
+  res.send('This poll is no longer active')
+} else {
+  findPoll.findPollDis(adminURL, (err, rows) => {
+    if (err) {
+      console.log("error finding poll data");
+      //should we put our error send here if we cannot find the url?
+    }
+    console.log(`testing if specific poll data is passed in: ${rows}`);
+// how to pass the data to the specific poll???
+  })
+}
+////we need to select actual values from our options database
+////delete option
+}
 
 
-
+//DELETE (POST) delete poll page
+app.post("/polls/:id/delete", (req, res) => {
+  var pollURL = `polls/${req.params.id}`;
+  (find using----select func-----) {
+    delete -----select-----;
+  }
+  res.redirect("/urls");
+});
 
 
 
