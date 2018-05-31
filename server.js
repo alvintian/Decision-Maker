@@ -39,9 +39,10 @@ app.use(express.static("public"));
 app.use("/api/users", usersRoutes(knex));
 
 // knex/db communicating functions
-const userData = require("./scripts/createUserData")(knex);
-const pollData = require("./scripts/createPollData")(knex);
-const findPoll = require("./scripts/findPoll")(knex);
+const userData = require("./public/scripts/createUserData")(knex);
+const pollData = require("./public/scripts/createPollData")(knex);
+const findPoll = require("./public/scripts/findPoll")(knex);
+const deletePoll = require("./public/scripts/deletePoll")(knex);
 
 
 // Generate random string function (eventually move to module)
@@ -59,6 +60,8 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+
+
 // POST create poll
 app.post("/polls", (req, res) => {
       var pollDesc = req.body.description; //now being handled by Ajax
@@ -69,8 +72,6 @@ app.post("/polls", (req, res) => {
       var pollURL = `polls/${pollId}` //send to database?
       var adminURL = `admin/polls/${pollId}` //send to database?
 
-      //nolan to send in an array...
-        //options... how do we capture from the form? loop through each item and send to database?
         if (!userEmail) {
           res.send('You must enter an email to create a poll')
         } else {
@@ -105,30 +106,22 @@ app.post("/polls", (req, res) => {
 // GET specific poll page
 app.get("/polls/:id", (req, res) => {
   var pollURL = `polls/${req.params.id}`;
-
-if(...would be if the select query comes to nothing...) {
-  res.send('This poll is no longer active')
-} else {
   findPoll.findPollDis(pollURL, (err, rows) => {
     if (err) {
       console.log("error finding poll data");
       //should we put our error send here if we cannot find the url?
     }
+    var pollData = rows;
     console.log(`testing if specific poll data is passed in: ${rows}`);
-    /// send in JSON format?
-// how to pass the data to the specific poll???
-  })
+    res.render("polls_show", rows)
+  });
 }
-}
+
 
 //GET admin specific poll page... results?
 app.get("/admin/polls/:id"), (req, res) => {
 var adminURL = `admin/polls/${req.params.id}`;
-
-if(...would be if the select query comes to nothing...) {
-  res.send('This poll is no longer active')
-} else {
-  findPoll.findPollDis(adminURL, (err, rows) => {
+  findPoll.findPollDis(adminURL, (err, rows) => { ////need join table here to access options
     if (err) {
       console.log("error finding poll data");
       //should we put our error send here if we cannot find the url?
@@ -146,16 +139,11 @@ if(...would be if the select query comes to nothing...) {
 //DELETE (POST) delete poll page
 app.post("/polls/:id/delete", (req, res) => {
   var pollURL = `polls/${req.params.id}`;
-  findPoll.findPollDis(pollURL, (err, row) => {
-    if (err) {
-      console.log("error finding page")
-    }
-
-    delete -----select-----;
+  deletePoll.delPoll(pollURL) => {
+     console.log("successfully deleted");
   }
-  res.redirect("/urls");
-});
-
+    res.redirect("/polls");
+  });
 
 
 
