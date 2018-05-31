@@ -16,7 +16,7 @@ module.exports = (knex) => {
 	});
 
 
-	router.post('/', (req, res) => {
+	router.post('/api/users', (req, res) => {
 		let insertuser = {
 			name: req.body.name,
 			email: req.body.email
@@ -48,10 +48,8 @@ module.exports = (knex) => {
 					poll_question: req.body.question,
 					user_id_fk: response[0]
 				}).into('poll').returning('poll_id'))
-
-		//		.insert(insertpoll).into('poll').select('req.body.question', id).from('users')
-
-		.then(function(response) {
+			//		.insert(insertpoll).into('poll').select('req.body.question', id).from('users')
+			.then(function(response) {
 				return knex('option')
 					.insert([{
 						choice_description: req.body.op1,
@@ -75,10 +73,8 @@ module.exports = (knex) => {
 		// 	.where('name').equals(req.body.name);
 		// .insert(insertoption).into('option')
 		// .insert(insertoption2).into('option')
+		// res.redirect('/poll');
 
-		.then((results) => {
-			res.json(results);
-		});
 	});
 	return router;
 }

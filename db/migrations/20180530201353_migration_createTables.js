@@ -1,7 +1,7 @@
 exports.up = function(knex, Promise) {
 	return knex.schema.dropTableIfExists('option')
 		.dropTableIfExists('poll')
-.dropTableIfExists('users')
+		.dropTableIfExists('users')
 		.then(createUserTable)
 		.then(createPollTable)
 		.then(createOptionTable)

@@ -21,7 +21,7 @@ var max_fields = 7;
 
 	$.ajax({
 		method: "GET",
-		url: "/api/users"
+		url: "/"
 	}).done((users) => {
 		for (user of users) {
 			$("<div>").text(user.name).appendTo($("body"));
@@ -48,7 +48,7 @@ var max_fields = 7;
 
 
 	});
-
+});
 	// $submission.on('click', function() {
 	// 	tweet.count = parseInt(tweet.count) + 1;
 	// 	$.ajax({
