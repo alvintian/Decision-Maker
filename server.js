@@ -55,7 +55,6 @@ function generateRandomString() {
 }
 
 
-// GET homepage --> no data to be sent here... just render the ejs file
 app.get("/", (req, res) => {
   res.render("index");
 });
@@ -147,7 +146,11 @@ if(...would be if the select query comes to nothing...) {
 //DELETE (POST) delete poll page
 app.post("/polls/:id/delete", (req, res) => {
   var pollURL = `polls/${req.params.id}`;
-  (find using----select func-----) {
+  findPoll.findPollDis(pollURL, (err, row) => {
+    if (err) {
+      console.log("error finding page")
+    }
+
     delete -----select-----;
   }
   res.redirect("/urls");
