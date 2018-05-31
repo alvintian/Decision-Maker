@@ -1,5 +1,4 @@
-
-.navbar-inverse{
+nav.navbar.navbar-inverse{
   background-color: #1B6CB2;
   margin-bottom:0px;
 }
@@ -24,11 +23,14 @@
 }
 
 
-body {
-  background-color: white;
+body.over {
+background-color:#72BEFF;
+
   h1 {
     color: black;
     text-align: center;
+
+
 
   }
 
@@ -44,15 +46,16 @@ body {
   }
 
   .remove_field {
-    margin-top:10px;
-    margin-bot:15px;
+    float:right;
+    margin-top:5px;
+    margin-bot:5px;
 
   }
 
 .container {
   width: 100%;
   background-color:#72BEFF;
-  height:100%;
+  border-bottom:500px;
   }
 
 .panel {
@@ -88,5 +91,6 @@ body {
 
 
 
-}
 
+
+}

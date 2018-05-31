@@ -64,6 +64,7 @@ app.get("/", (req, res) => {
 
 // POST create poll
 // app.post("/polls", (req, res) => {
+   
 //       var pollDesc = req.body.description; //now being handled by Ajax
 //       var pollQuestion = req.body.question; //now being handled by Ajax
 //       var pollId = generateRandomString();
@@ -71,6 +72,7 @@ app.get("/", (req, res) => {
 //       var userEmail = req.body.email; //now being handled by Ajax
 //       var pollURL = `polls/${pollId}` //send to database?
 //       var adminURL = `admin/polls/${pollId}` //send to database?
+
 
 //         if (!userEmail) {
 //           res.send('You must enter an email to create a poll')
@@ -84,6 +86,8 @@ app.get("/", (req, res) => {
 //               console.log(`testing if user add successful: ${rows}`)
 //             }
 //             //function to send data to database (poll table)
+
+
 //             // pollData.addPoll(pollTitle, pollDesc, pollURL, adminURL, (err, rows) => {
 //             //     if (err) {
 //             //       console.log("error adding poll data");
@@ -92,6 +96,7 @@ app.get("/", (req, res) => {
 //             //   }
 //             //tweak to send just URLs?
 //               pollData.addPoll(pollURL, adminURL, (err, rows) => {
+
 //                 if (err) {
 //                   console.log("error adding poll data");
 //                 }
@@ -101,6 +106,7 @@ app.get("/", (req, res) => {
 //             })
 //             //send email to user... should this be done on server or ajax
 //     })
+
 
 
 // GET specific poll page
@@ -131,6 +137,7 @@ app.get("/polls/:id", (req, res) => {
     // res.render("polls_show", {pollQ});
   });
 });
+
 
 
 //GET admin specific poll page... results?
