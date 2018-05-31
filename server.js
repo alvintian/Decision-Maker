@@ -60,91 +60,91 @@ app.get("/", (req, res) => {
 });
 
 // POST create poll
-app.post("/polls", (req, res) => {
-      var pollDesc = req.body.description; //send to database
-      var pollQuestion = req.body.question; //send to database
-      var pollId = generateRandomString();
-      var userName = req.body.name;
-      var userEmail = req.body.email;
-      var pollURL = `polls/${pollId}`
-      var adminURL = `admin/polls/${pollId}`
-       //send to database
-       //
-      var options = []??//nolan to send in an array...
-        //options... how do we capture from the form? loop through each item and send to database?
-        if (!userEmail) {
-          res.send('You must enter an email to create a poll')
-        } else {
-          //how are we treating existing emails...create a function to check if it exists?
-          //function to send data to database (user table)
-          userData.addUser(userEmail, userName, (err, rows) => {
-              if (err) {
-                console.log("error adding user data");
-              }
-              console.log(`testing if user add successful: ${rows}`)
-            }
-            //function to send data to database (poll table)
-            pollData.addPoll(pollTitle, pollDesc, pollURL, adminURL, (err, rows) => {
-                if (err) {
-                  console.log("error adding poll data");
-                }
-                console.log(`testing if poll data add successful: ${rows}`)
-              }
-              res.redirect(`/polls/${PollId}`);
-            })
-            //send email to user... should this be done on server or ajax
-    })
+// app.post("/polls", (req, res) => {
+//       var pollDesc = req.body.description; //send to database
+//       var pollQuestion = req.body.question; //send to database
+//       var pollId = generateRandomString();
+//       var userName = req.body.name;
+//       var userEmail = req.body.email;
+//       var pollURL = `polls/${pollId}`
+//       var adminURL = `admin/polls/${pollId}`
+//        //send to database
+//        //
+//       var options = []??//nolan to send in an array...
+//         //options... how do we capture from the form? loop through each item and send to database?
+//         if (!userEmail) {
+//           res.send('You must enter an email to create a poll')
+//         } else {
+//           //how are we treating existing emails...create a function to check if it exists?
+//           //function to send data to database (user table)
+//           userData.addUser(userEmail, userName, (err, rows) => {
+//               if (err) {
+//                 console.log("error adding user data");
+//               }
+//               console.log(`testing if user add successful: ${rows}`)
+//             }
+//             //function to send data to database (poll table)
+//             pollData.addPoll(pollTitle, pollDesc, pollURL, adminURL, (err, rows) => {
+//                 if (err) {
+//                   console.log("error adding poll data");
+//                 }
+//                 console.log(`testing if poll data add successful: ${rows}`)
+//               }
+//               res.redirect(`/polls/${PollId}`);
+//             })
+//             //send email to user... should this be done on server or ajax
+//     })
 
 
-// GET specific poll page
-app.get("/polls/:id", (req, res) => {
-  var pollURL = `polls/${req.params.id}`;
+// // GET specific poll page
+// app.get("/polls/:id", (req, res) => {
+//   var pollURL = `polls/${req.params.id}`;
 
-if(...would be if the select query comes to nothing...) {
-  res.send('This poll is no longer active')
-} else {
-  findPoll.findPollDis(pollURL, (err, rows) => {
-    if (err) {
-      console.log("error finding poll data");
-      //should we put our error send here if we cannot find the url?
-    }
-    console.log(`testing if specific poll data is passed in: ${rows}`);
-    /// send in JSON format?
-// how to pass the data to the specific poll???
-  })
-}
-}
+// if(...would be if the select query comes to nothing...) {
+//   res.send('This poll is no longer active')
+// } else {
+//   findPoll.findPollDis(pollURL, (err, rows) => {
+//     if (err) {
+//       console.log("error finding poll data");
+//       //should we put our error send here if we cannot find the url?
+//     }
+//     console.log(`testing if specific poll data is passed in: ${rows}`);
+//     /// send in JSON format?
+// // how to pass the data to the specific poll???
+//   })
+// }
+// }
 
-//GET admin specific poll page... results?
-app.get("/admin/polls/:id"), (req, res) => {
-var adminURL = `admin/polls/${req.params.id}`;
+// //GET admin specific poll page... results?
+// app.get("/admin/polls/:id"), (req, res) => {
+// var adminURL = `admin/polls/${req.params.id}`;
 
-if(...would be if the select query comes to nothing...) {
-  res.send('This poll is no longer active')
-} else {
-  findPoll.findPollDis(adminURL, (err, rows) => {
-    if (err) {
-      console.log("error finding poll data");
-      //should we put our error send here if we cannot find the url?
-    }
-    console.log(`testing if specific poll data is passed in: ${rows}`);
-// how to pass the data to the specific poll???
-  })
-}
-///
-////we need to select actual values from our options database
-////delete option
-}
+// if(...would be if the select query comes to nothing...) {
+//   res.send('This poll is no longer active')
+// } else {
+//   findPoll.findPollDis(adminURL, (err, rows) => {
+//     if (err) {
+//       console.log("error finding poll data");
+//       //should we put our error send here if we cannot find the url?
+//     }
+//     console.log(`testing if specific poll data is passed in: ${rows}`);
+// // how to pass the data to the specific poll???
+//   })
+// }
+// ///
+// ////we need to select actual values from our options database
+// ////delete option
+// }
 
 
-//DELETE (POST) delete poll page
-app.post("/polls/:id/delete", (req, res) => {
-  var pollURL = `polls/${req.params.id}`;
-  (find using----select func-----) {
-    delete -----select-----;
-  }
-  res.redirect("/urls");
-});
+// //DELETE (POST) delete poll page
+// app.post("/polls/:id/delete", (req, res) => {
+//   var pollURL = `polls/${req.params.id}`;
+//   (find using----select func-----) {
+//     delete -----select-----;
+//   }
+//   res.redirect("/urls");
+// });
 
 
 
