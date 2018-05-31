@@ -133,22 +133,22 @@ app.get("/polls/:id", (req, res) => {
 });
 
 
-//GET admin specific poll page... results?
-// app.get("/admin/polls/:id"), (req, res) => {
-// var adminURL = `admin/polls/${req.params.id}`;
-//   findPoll.findPollDis(adminURL, (err, rows) => { ////need join table here to access options
-//     if (err) {
-//       console.log("error finding poll data");
-//       //should we put our error send here if we cannot find the url?
-//     }
-//     console.log(`testing if specific poll data is passed in: ${rows}`);
-// // how to pass the data to the specific poll???
-//   })
-// }
-// ///
-// ////we need to select actual values from our options database
-// ////delete option
-// }
+GET admin specific poll page... results?
+app.get("/admin/polls/:id"), (req, res) => {
+var adminURL = `admin/polls/${req.params.id}`;
+  findPoll.findPollDis(adminURL, (err, rows) => { ////need join table here to access options
+    if (err) {
+      console.log("error finding poll data");
+      //should we put our error send here if we cannot find the url?
+    }
+    console.log(`testing if specific poll data is passed in: ${rows}`);
+// how to pass the data to the specific poll???
+  })
+}
+///
+////we need to select actual values from our options database
+////delete option
+}
 
 
 // //DELETE (POST) delete poll page
