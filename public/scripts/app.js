@@ -3,10 +3,12 @@ $(() => {
 // on submit, grab object, stringify it and set val of hidden field with it
 //adding JQUERY to increase the amount of options a user can have per decision
 var id = 1;
-
+var max_fields = 7
+var x = 1;
 $( "#button" ).click(function() {
-
     var name = 'Option'+ id;
+    if(x < max_fields);
+    x++;
     $('.empty').append('<label for="'+id+'">'+name+':</label><input type="text" class="form-control" name="op'+id+'"><button class="remove_field">Remove</button></div>')
     id++;
 });
