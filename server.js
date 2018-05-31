@@ -70,6 +70,7 @@ app.post("/polls", (req, res) => {
       var pollURL = `polls/${pollId}`
       var adminURL = `admin/polls/${pollId}`
        //send to database
+       //
       var options = []??//nolan to send in an array...
         //options... how do we capture from the form? loop through each item and send to database?
         if (!userEmail) {
@@ -109,12 +110,13 @@ if(...would be if the select query comes to nothing...) {
       //should we put our error send here if we cannot find the url?
     }
     console.log(`testing if specific poll data is passed in: ${rows}`);
+    /// send in JSON format?
 // how to pass the data to the specific poll???
   })
 }
 }
 
-//GET admin specific poll page
+//GET admin specific poll page... results?
 app.get("/admin/polls/:id"), (req, res) => {
 var adminURL = `admin/polls/${req.params.id}`;
 
@@ -130,6 +132,7 @@ if(...would be if the select query comes to nothing...) {
 // how to pass the data to the specific poll???
   })
 }
+///
 ////we need to select actual values from our options database
 ////delete option
 }
