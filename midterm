@@ -1,0 +1,165 @@
+\q
+create database test_db
+\c test_db
+\c test_db;
+create database test_db;
+CREATE DATABASE test_db
+\c test_db;
+CREATE DATABASE test_db;
+\c
+\c test_db;
+CREATE DATABASE test_db;
+\c test_db;
+CREATE TABLE famous_people (
+  id BIGSERIAL PRIMARY KEY,
+  first_name VARCHAR(50),
+  last_name VARCHAR(50),
+  birthdate DATE
+);INSERT INTO famous_people (first_name, last_name, birthdate)
+  VALUES ('Abraham', 'Lincoln', '1809-02-12');
+INSERT INTO famous_people (first_name, last_name, birthdate)
+  VALUES ('Mahatma', 'Gandhi', '1869-10-02');
+INSERT INTO famous_people (first_name, last_name, birthdate)
+  VALUES ('Paul', 'Rudd', '1969-04-06');
+INSERT INTO famous_people (first_name, last_name, birthdate)
+  VALUES ('Paul', 'Giamatti', '1967-06-06');
+SELECT * FROM famous_people;
+/q
+\q
+navy_schema.sql;
+navy_schema.sql
+\q
+select * from navy_schema
+;
+\d
+\q
+\c test_db
+\q
+\c test_db
+\d
+\d famous_people
+\q
+\d milestones
+\d
+\d milestones
+\c test_db
+\d
+/l
+\l
+\d milestones
+;q
+\q
+create role labber with login password 'labber';
+create database midterm owner labber'
+'
+;
+create database midterm owner labber;
+\q
+\q
+\c
+\d
+\l
+\c test_db
+\d
+\q
+\l
+\c test_db
+\d milestones
+\q
+\q
+\l
+/d midterm
+\d midterm
+\c midterm
+\d
+\d migrations
+\q
+\c midterm
+\d
+\q
+\c midterm
+\d
+\q
+\c midtemr
+\c mditerm
+\c midterm
+\d
+\q
+\c midterm
+\
+\d
+\d migrations
+\d migrations\q
+\c midterm
+\d
+users
+;
+\d users
+select * from users
+;
+select * from poll
+\d poll
+select * from poll;
+select * from options;
+select * from option;
+\q
+\c
+\l
+\c midterm
+\d
+\d option
+select * from option
+;
+select * from poll;
+/q
+\q
+\c midterm
+se;ect * from users
+select * from users;
+\d
+select * from users;
+select * from poll;
+select * from option;
+\d
+\q
+\c
+\c midterm
+\d
+select * from users
+;
+\q
+\c
+\c midterm
+\d
+select * from poll
+;
+\q
+\c midterm
+\d 
+select * from option
+;
+\q
+\c midterm
+select * from users
+;
+select * from poll;
+select * from option;
+\q
+\c midterm
+select * from users;
+select * from poll;
+select * from option;
+select * from option;
+\q
+\c midterm
+select * form poll;
+select * fr0m poll;
+select * from poll;
+select * from option;
+\q
+\c midterm
+select * from users;
+select * from poll;
+select * from option;
+\q
+\s midterm
