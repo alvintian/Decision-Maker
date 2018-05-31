@@ -104,21 +104,36 @@ app.get("/", (req, res) => {
 
 
 // GET specific poll page
-// app.get("/polls/:id", (req, res) => {
-//   var pollURL = `polls/${req.params.id}`;
-//   findPoll.findPollDis(pollURL, (err, rows) => {
-//     if (err) {
-//       console.log("error finding poll data");
-//       //should we put our error send here if we cannot find the url?
-//     }
-//     var pollData = rows;
-//     console.log(`testing if specific poll data is passed in: ${rows}`);
-//     res.render("polls_show", rows)
-//   });
-// }
+app.get("/polls/:id", (req, res) => {
+  var pollURL = `polls/${req.params.id}`;
+  console.log(pollURL);
+  findPoll.findPollDis(pollURL, (err, rows) => {
+    if (err) {
+      console.log("error finding poll data");
+      //should we put our error send here if we cannot find the url?
+      // res.status(500).send()
+
+    }
+    console.log(rows);
+    console.log(rows[0]["poll_question"]);
+    var pollData = {
+      pollQuestion: rows[0]["poll_question"],
+      options:  rows.map(function(e){
+  return e["choice_description"];
+ })
+    }
+
+// console.log(pollData);
+ /////
+
+    // console.log(`testing if specific poll data is selected: ${results.rows}`);
+    res.render("polls_show", {pollData});
+    // res.render("polls_show", {pollQ});
+  });
+});
 
 
-// //GET admin specific poll page... results?
+//GET admin specific poll page... results?
 // app.get("/admin/polls/:id"), (req, res) => {
 // var adminURL = `admin/polls/${req.params.id}`;
 //   findPoll.findPollDis(adminURL, (err, rows) => { ////need join table here to access options
