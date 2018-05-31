@@ -55,7 +55,6 @@ function generateRandomString() {
 }
 
 
-// GET homepage --> no data to be sent here... just render the ejs file
 app.get("/", (req, res) => {
   res.render("index");
 });
