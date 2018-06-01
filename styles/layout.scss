@@ -38,59 +38,61 @@ background-color:#72BEFF;
     display: block;
     margin: auto;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 25px;
   }
 
   .btn-md {
    margin-top:10px;
+   background-color:#54CC14;
+   border:2px solid #54CC14;
   }
 
   .remove_field {
-    float:right;
-    margin-top:5px;
-    margin-bot:5px;
-
+   float:right;
   }
+
+
+
+
+
+.form-group{
+  margin-bottom:10px;
+
+
+}
+
 
 .container {
-  width: 100%;
+  width: 55%;
   background-color:#72BEFF;
   border-bottom:500px;
-  }
 
-.panel {
-   height:180px;
-   width:23.5%;
-   margin:10px;
-   padding-left:10px;
-
-
-  }
-
-  .button_column {
-
-
-.panel{
- background-color:#72BEFF;
+.new_choice{
+  margin-bottom:10px;
 }
 
-.btn-info {
 
-   height:180px;
-   width:110%;
-   font-size:60px;
-   margin-left:-11px;
-   margin-top:-2px;
   }
-
-
-
- }
-
-
-
-
-
-
-
 }
+
+
+.user_polls {
+  text-align:center;
+  margin-top:40px;
+}
+
+.panel.panel-default {
+  width:22.5%;
+  margin-left:22px;
+  height:190px;
+}
+
+.polls{
+  margin-top:50px;
+}
+
+
+
+
+
+

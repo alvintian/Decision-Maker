@@ -20,6 +20,20 @@
 
 
 
+
+   </head>
+
+   <body class="over">
+     <nav class="navbar navbar-inverse">
+   <div class="container-fluid">
+     <div class="navbar-header">
+      <a class="brand" href="http://localhost:8080/">Decision Maker</a>
+     </div>
+
+   </div>
+ </nav>
+
+
    </head>
 
    <body class="over">
@@ -41,8 +55,15 @@
 
 
 
+ <main class="container">
+
+
+
+
   <h1>Get help with a Decision</h1>
  <form method='POST' action='/api/users' class="info_input" id="form_id">
+
+
    <div class="form-group">
      <label for="name">Name:</label>
     <input type="text" class="form-control" id="user_name" name="name" placeholder="YUR NAME">
@@ -58,20 +79,57 @@
    <div class="form-group">
      <label for="Question">Provide a Discription:</label>
     <input type="text" class="form-control" id="Description" name="description" placeholder="Provide a description to help people choose">
+
+  </div>
      <div class="form-group">
        <label for="usr">Option:</label>
       <input type="text" class="form-control" id="usr" name="op1">
-     </div>
+    </div>
+      <div class="form-group">
+
+       <label for="usr">Option:</label>
+      <input type="text" class="form-control" id="usr" name="op2">
+
    </div>
    <div class = "empty">
    </div>
-   <button id="button" type="button" class="btn btn-primary btn-md"">Create New Option +</button>
+   <button id="button" type="button" class="btn btn-primary btn-md">Create New Option +</button>
+
    <button type="submit" class="btn btn-primary btn-lg">Submit</button>
  </form>
+
+
+<!-- added 2nd option field for UX dont know if same id will conduse database -->
+
+
+
  </main>
+
  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+
  <!-- Latest compiled JavaScript -->
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  <script type="text/javascript" src="/scripts/app.js"></script>
+
  </body>
  </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
