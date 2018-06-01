@@ -19,6 +19,12 @@ h3{
   </head>
 
   <body>
-    <h1>Hello poll!</h1>
+   <h1>Poll question: <%=pollData["pollQuestion"]%></h1>
+    <ul>
+        <% pollData["options"].forEach(function(opt) { %>
+
+            <li> <%=opt %>  </li>
+            <% }); %>
+    </ul>
   </body>
 </html>

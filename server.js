@@ -46,30 +46,48 @@ const pollData = require("./public/scripts/createPollData")(knex);
 const findPoll = require("./public/scripts/findPoll")(knex);
 const deletePoll = require("./public/scripts/deletePoll")(knex);
 const queryOptions = require("./public/scripts/queryOptions")(knex);
-// const findPollConf = require("./public/scripts/findPollConf")(knex);
+const findPollConf = require("./public/scripts/findPollConf")(knex);
 
 
 
 app.get("/", (req, res) => {
   res.render("index");
 });
-app.get("/poll", (req, res) => {
-  res.render("poll");
+// app.get("/poll", (req, res) => {
+//   res.render("poll");
+// });
+
+// GET - confirmation page - displaying the two urls to share with friends - db query for urls
+app.get("/polls/thankyou/:id", (req, res) => {
+  var pollURL = `polls/${req.params.id}`;
+findPollConf.findPollUrls(pollURL, (err, rows) => {
+    if (err) {
+      console.log("error finding poll data");
+      res.status(500).send()
+    }
+    var urls = rows[0];
+
+    console.log(urls["poll_url"]);
+    // console.log(`successfully found: ${rows}`);
+
+    res.render("thankyou", {urls});
+});
 });
 
-
-
-
+//GET - userPolls - all polls associated with one poll
+app.get("/admin/polls/all", (req, res) => {
+  return res.render("userpolls");
+});
 
 // GET Results page - data query for question, options and score
 app.get("/admin/polls/:id", (req, res) => {
-  const pollURL = `polls/${req.params.id}`;
+  var pollURL = `polls/${req.params.id}`;
   queryOptions.findPollData(pollURL, (err, rows) => {
     if (err) {
       console.log("error finding poll data");
       res.status(500).send()
     }
-    console.log(rows);
+    // console.log(rows);
       var pollResults = {
       pollQuestion: rows[0]["poll_question"],
       options: rows.map(function(e) {
@@ -78,15 +96,15 @@ app.get("/admin/polls/:id", (req, res) => {
       scores: rows.map(function(e) {
         return e["score"];
       })
-    }
+    };
     console.log(pollResults);
+    res.render("results", {pollResults});
   })
-  res.render("results", {pollResults});
 });
 
 // GET specific poll page - db query for question, options
 app.get("/polls/:id", (req, res) => {
-  const pollURL = `polls/${req.params.id}`;
+  var pollURL = `polls/${req.params.id}`;
   console.log(pollURL);
   findPoll.findPollDis(pollURL, (err, rows) => {
     if (err) {
@@ -96,7 +114,7 @@ app.get("/polls/:id", (req, res) => {
     }
     // console.log(rows);
     // console.log(rows[0]["poll_question"]);
-    const pollData = {
+    var pollData = {
       pollQuestion: rows[0]["poll_question"],
       options: rows.map(function(e) {
         return e["choice_description"];
@@ -104,30 +122,16 @@ app.get("/polls/:id", (req, res) => {
     }
     console.log(pollData);
 
-    res.render("polls_show", {pollData});
+    res.render("poll", {pollData});
 
     // res.render("polls_show", {pollQ});
   });
 });
 
-// //GET - userPolls - all polls associated with one poll
-// app.get("admin/polls/all", (req, res) => {
-//   res.render("userpolls");
-// });
 
-// //GET - confirmation page - displaying the two urls to share with friends - db query for urls
-// app.get("polls/thankyou/:id", req, res) => {
-//   const pollURL = `polls/${req.params.id}`;
-// findPollConf.findPollUrls(pollURL, (err, rows) => {
-//     if (err) {
-//       console.log("error finding poll data");
-//       res.status(500).send()
-//     }
-//     console.log(`successfully found: ${rows}`)
-//   res.render("thankyou", {rows})
-// }
-// });
 
+
+// });
 
 
 
