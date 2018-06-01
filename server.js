@@ -2,17 +2,17 @@
 
 require('dotenv').config();
 
-const PORT        = process.env.PORT || 8080;
-const ENV         = process.env.ENV || "development";
-const express     = require("express");
-const bodyParser  = require("body-parser");
-const sass        = require("node-sass-middleware");
-const app         = express();
+const PORT = process.env.PORT || 8080;
+const ENV = process.env.ENV || "development";
+const express = require("express");
+const bodyParser = require("body-parser");
+const sass = require("node-sass-middleware");
+const app = express();
 
-const knexConfig  = require("./knexfile");
-const knex        = require("knex")(knexConfig[ENV]);
-const morgan      = require('morgan');
-const knexLogger  = require('knex-logger');
+const knexConfig = require("./knexfile");
+const knex = require("knex")(knexConfig[ENV]);
+const morgan = require('morgan');
+const knexLogger = require('knex-logger');
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
@@ -26,7 +26,9 @@ app.use(morgan('dev'));
 app.use(knexLogger(knex));
 
 app.set("view engine", "ejs");
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use("/styles", sass({
   src: __dirname + "/styles",
   dest: __dirname + "/public/styles",
@@ -43,6 +45,7 @@ const userData = require("./public/scripts/createUserData")(knex);
 const pollData = require("./public/scripts/createPollData")(knex);
 const findPoll = require("./public/scripts/findPoll")(knex);
 const deletePoll = require("./public/scripts/deletePoll")(knex);
+const queryOptions = require("./public/scripts/queryOptions")(knex);
 
 
 // Generate random string function (eventually move to module)
@@ -101,7 +104,28 @@ app.get("/", (req, res) => {
 //             })
 //             //send email to user... should this be done on server or ajax
 //     })
-
+// GET Results page
+app.get("/admin/polls/:id", (req, res) => {
+  var pollURL = `polls/${req.params.id}`;
+  queryOptions.findPollData(pollURL, (err, rows) => {
+    if (err) {
+      console.log("error finding poll data");
+      res.status(500).send()
+    }
+    console.log(rows);
+      var pollResults = {
+      pollQuestion: rows[0]["poll_question"],
+      options: rows.map(function(e) {
+        return e["choice_description"];
+      }),
+      scores: rows.map(function(e) {
+        return e["score"];
+      })
+    }
+    console.log(pollResults);
+  })
+  res.render("results");
+});
 
 // GET specific poll page
 app.get("/polls/:id", (req, res) => {
@@ -110,57 +134,48 @@ app.get("/polls/:id", (req, res) => {
   findPoll.findPollDis(pollURL, (err, rows) => {
     if (err) {
       console.log("error finding poll data");
-      //should we put our error send here if we cannot find the url?
-      // res.status(500).send()
+      res.status(500).send()
 
     }
-    console.log(rows);
-    console.log(rows[0]["poll_question"]);
+    // console.log(rows);
+    // console.log(rows[0]["poll_question"]);
     var pollData = {
       pollQuestion: rows[0]["poll_question"],
-      options:  rows.map(function(e){
-  return e["choice_description"];
- })
+      options: rows.map(function(e) {
+        return e["choice_description"];
+      })
     }
 
-// console.log(pollData);
- /////
-
-    // console.log(`testing if specific poll data is selected: ${results.rows}`);
-    res.render("polls_show", {pollData});
+    console.log(pollData);
+    res.render("polls_show", {
+      pollData
+    });
     // res.render("polls_show", {pollQ});
   });
 });
 
 
-GET admin specific poll page... results?
-app.get("/admin/polls/:id"), (req, res) => {
-var adminURL = `admin/polls/${req.params.id}`;
-  findPoll.findPollDis(adminURL, (err, rows) => { ////need join table here to access options
-    if (err) {
-      console.log("error finding poll data");
-      //should we put our error send here if we cannot find the url?
-    }
-    console.log(`testing if specific poll data is passed in: ${rows}`);
-// how to pass the data to the specific poll???
-  })
-}
-///
-////we need to select actual values from our options database
-////delete option
-}
 
-
-// //DELETE (POST) delete poll page
+//DELETE (POST) delete poll page
 // app.post("/polls/:id/delete", (req, res) => {
 //   var pollURL = `polls/${req.params.id}`;
 //   deletePoll.delPoll(pollURL) => {
-//      console.log("successfully deleted");
+//     console.log("successfully deleted");
 //   }
-//     res.redirect("/polls");
-//   });
+//   res.redirect("/polls");
+// });
 
-
+// //LOGIN (POST)
+// app.post("/login", (req, res) => {
+//   var emailInput = req.body.email;
+//   for (userIDs in users) {
+//     if (users[userIDs]["email"] == emailInput && bcrypt.compareSync(req.body.password, users[userIDs]["password"])) {
+//       req.session.user_ID = userIDs;
+//       return res.redirect("/urls");
+//     }
+//   }
+//   return res.send('<p>Invalid email or password. <a href="/login">Try again</a></p>');
+// });
 
 
 
