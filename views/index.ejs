@@ -20,6 +20,20 @@
 
 
 
+
+   </head>
+
+   <body class="over">
+     <nav class="navbar navbar-inverse">
+   <div class="container-fluid">
+     <div class="navbar-header">
+      <a class="brand" href="http://localhost:8080/">Decision Maker</a>
+     </div>
+
+   </div>
+ </nav>
+
+
    </head>
 
    <body class="over">
@@ -41,15 +55,19 @@
 
 
 
+ <main class="container">
+
+
+
+
   <h1>Get help with a Decision</h1>
  <form method='POST' action='/api/users' class="info_input" id="form_id">
+
 
    <div class="form-group">
      <label for="name">Name:</label>
     <input type="text" class="form-control" id="user_name" name="name" placeholder="YUR NAME">
    </div>
-
-
    <div class="form-group">
      <label for="email">Email address:</label>
     <input type="email" class="form-control" id="email" name="email" placeholder="We will send you and email so you can ask your friends">
@@ -61,6 +79,7 @@
    <div class="form-group">
      <label for="Question">Provide a Discription:</label>
     <input type="text" class="form-control" id="Description" name="description" placeholder="Provide a description to help people choose">
+
   </div>
      <div class="form-group">
        <label for="usr">Option:</label>
@@ -94,6 +113,7 @@
 
  </body>
  </html>
+
 
 
 
