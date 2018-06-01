@@ -6,14 +6,14 @@ exports.up = function(knex, Promise) {
 		.then(createPollTable)
 		.then(createOptionTable)
 		.then(createDummyData);
+  function createUserTable() {
+    return knex.schema.createTable('users', table => {
+      table.increments('id').primary()
+      table.string('email').unique().notNullable().comment('email is a must')
+      table.string('name')
+    })
+  };
 
-	function createUserTable() {
-		return knex.schema.createTable('users', table => {
-			table.increments('id').primary()
-			table.string('email').unique().notNullable().comment('email is a must')
-			table.string('name')
-		})
-	};
 
 	function createPollTable() {
 		return knex.schema.createTable('poll', table => {
@@ -53,7 +53,7 @@ exports.up = function(knex, Promise) {
 };
 
 exports.down = function(knex, Promise) {
-		return knex.schema.dropTableIfExists('option')
-		.dropTableIfExists('poll')
+    return knex.schema.dropTableIfExists('option')
+    .dropTableIfExists('poll')
 .dropTable('users')
 };
