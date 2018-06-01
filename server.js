@@ -37,7 +37,8 @@ app.use("/styles", sass({
 }));
 app.use(express.static("public"));
 
-
+// Mount all resource routes
+app.use("/api/users", usersRoutes(knex));
 
 // knex/db communicating functions
 const userData = require("./public/scripts/createUserData")(knex);
@@ -45,17 +46,8 @@ const pollData = require("./public/scripts/createPollData")(knex);
 const findPoll = require("./public/scripts/findPoll")(knex);
 const deletePoll = require("./public/scripts/deletePoll")(knex);
 const queryOptions = require("./public/scripts/queryOptions")(knex);
+// const findPollConf = require("./public/scripts/findPollConf")(knex);
 
-
-// Generate random string function (eventually move to module)
-function generateRandomString() {
-  var randomString = "";
-  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  for (var i = 0; i < 6; i++) {
-    randomString += possible.charAt(Math.floor(Math.random() * possible.length));
-  }
-  return randomString;
-}
 
 
 app.get("/", (req, res) => {
@@ -65,9 +57,100 @@ app.get("/poll", (req, res) => {
   res.render("poll");
 });
 
-// Mount all resource routes
-app.use("/api/users", usersRoutes(knex));
 
+
+
+
+// GET Results page - data query for question, options and score
+app.get("/admin/polls/:id", (req, res) => {
+  const pollURL = `polls/${req.params.id}`;
+  queryOptions.findPollData(pollURL, (err, rows) => {
+    if (err) {
+      console.log("error finding poll data");
+      res.status(500).send()
+    }
+    console.log(rows);
+      var pollResults = {
+      pollQuestion: rows[0]["poll_question"],
+      options: rows.map(function(e) {
+        return e["choice_description"];
+      }),
+      scores: rows.map(function(e) {
+        return e["score"];
+      })
+    }
+    console.log(pollResults);
+  })
+  res.render("results", {pollResults});
+});
+
+// GET specific poll page - db query for question, options
+app.get("/polls/:id", (req, res) => {
+  const pollURL = `polls/${req.params.id}`;
+  console.log(pollURL);
+  findPoll.findPollDis(pollURL, (err, rows) => {
+    if (err) {
+      console.log("error finding poll data");
+      res.status(500).send()
+
+    }
+    // console.log(rows);
+    // console.log(rows[0]["poll_question"]);
+    const pollData = {
+      pollQuestion: rows[0]["poll_question"],
+      options: rows.map(function(e) {
+        return e["choice_description"];
+      })
+    }
+    console.log(pollData);
+
+    res.render("polls_show", {pollData});
+
+    // res.render("polls_show", {pollQ});
+  });
+});
+
+// //GET - userPolls - all polls associated with one poll
+// app.get("admin/polls/all", (req, res) => {
+//   res.render("userpolls");
+// });
+
+// //GET - confirmation page - displaying the two urls to share with friends - db query for urls
+// app.get("polls/thankyou/:id", req, res) => {
+//   const pollURL = `polls/${req.params.id}`;
+// findPollConf.findPollUrls(pollURL, (err, rows) => {
+//     if (err) {
+//       console.log("error finding poll data");
+//       res.status(500).send()
+//     }
+//     console.log(`successfully found: ${rows}`)
+//   res.render("thankyou", {rows})
+// }
+// });
+
+
+
+
+//DELETE (POST) delete poll page
+// app.post("/polls/:id/delete", (req, res) => {
+//   var pollURL = `polls/${req.params.id}`;
+//   deletePoll.delPoll(pollURL) => {
+//     console.log("successfully deleted");
+//   }
+//   res.redirect("/polls");
+// });
+
+// //LOGIN (POST) -----> redirect to user polls
+// app.post("/login", (req, res) => {
+//   var emailInput = req.body.email;
+//   for (userIDs in users) {
+//     if (users[userIDs]["email"] == emailInput && bcrypt.compareSync(req.body.password, users[userIDs]["password"])) {
+//       req.session.user_ID = userIDs;
+//       return res.redirect("/urls");
+//     }
+//   }
+//   return res.send('<p>Invalid email or password. <a href="/login">Try again</a></p>');
+// });
 
 // POST create poll
 // app.post("/polls", (req, res) => {
@@ -108,88 +191,6 @@ app.use("/api/users", usersRoutes(knex));
 //             })
 //             //send email to user... should this be done on server or ajax
 //     })
-// GET Results page
-app.get("/admin/polls/:id", (req, res) => {
-  var pollURL = `polls/${req.params.id}`;
-  queryOptions.findPollData(pollURL, (err, rows) => {
-    if (err) {
-      console.log("error finding poll data");
-      res.status(500).send()
-    }
-    console.log(rows);
-      var pollResults = {
-      pollQuestion: rows[0]["poll_question"],
-      options: rows.map(function(e) {
-        return e["choice_description"];
-      }),
-      scores: rows.map(function(e) {
-        return e["score"];
-      })
-    }
-    console.log(pollResults);
-  })
-  res.render("results");
-});
-
-// GET specific poll page
-app.get("/polls/:id", (req, res) => {
-  var pollURL = `polls/${req.params.id}`;
-  console.log(pollURL);
-  findPoll.findPollDis(pollURL, (err, rows) => {
-    if (err) {
-      console.log("error finding poll data");
-      res.status(500).send()
-
-    }
-    // console.log(rows);
-    // console.log(rows[0]["poll_question"]);
-    var pollData = {
-      pollQuestion: rows[0]["poll_question"],
-      options: rows.map(function(e) {
-        return e["choice_description"];
-      })
-    }
-    console.log(pollData);
-
-    res.render("polls_show", {pollData});
-
-    // res.render("polls_show", {pollQ});
-  });
-});
-
-//GET - userPolls
-app.get("admin/polls/all", (req, res) => {
-  res.render("userpolls");
-})
-
-
-
-
-
-
-
-
-//DELETE (POST) delete poll page
-// app.post("/polls/:id/delete", (req, res) => {
-//   var pollURL = `polls/${req.params.id}`;
-//   deletePoll.delPoll(pollURL) => {
-//     console.log("successfully deleted");
-//   }
-//   res.redirect("/polls");
-// });
-
-// //LOGIN (POST)
-// app.post("/login", (req, res) => {
-//   var emailInput = req.body.email;
-//   for (userIDs in users) {
-//     if (users[userIDs]["email"] == emailInput && bcrypt.compareSync(req.body.password, users[userIDs]["password"])) {
-//       req.session.user_ID = userIDs;
-//       return res.redirect("/urls");
-//     }
-//   }
-//   return res.send('<p>Invalid email or password. <a href="/login">Try again</a></p>');
-// });
-
 
 
 app.listen(PORT, () => {
