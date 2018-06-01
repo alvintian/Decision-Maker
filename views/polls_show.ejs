@@ -3,14 +3,18 @@
 <html lang="en">
   <head>
     <title>Home Page</title>
-
-
     <link rel="stylesheet" href="/styles/test.css" type="text/css" />
   </head>
 
   <body>
-    <h1>poll</h1>
+    <h1>Poll question: <%=pollData["pollQuestion"]%></h1>
+    <p>options<p>
+<ul>
+        <% pollData["options"].forEach(function(opt) { %>
 
+            <li> <%=opt %>  </li>
+            <% }); %>
+    </ul>
 
 </body>
 </html>

@@ -37,8 +37,7 @@ app.use("/styles", sass({
 }));
 app.use(express.static("public"));
 
-// Mount all resource routes
-app.use("/api/users", usersRoutes(knex));
+
 
 // knex/db communicating functions
 const userData = require("./public/scripts/createUserData")(knex);
@@ -62,7 +61,12 @@ function generateRandomString() {
 app.get("/", (req, res) => {
   res.render("index");
 });
+app.get("/poll", (req, res) => {
+  res.render("poll");
+});
 
+// Mount all resource routes
+app.use("/api/users", usersRoutes(knex));
 
 
 // POST create poll
@@ -145,14 +149,23 @@ app.get("/polls/:id", (req, res) => {
         return e["choice_description"];
       })
     }
-
     console.log(pollData);
-    res.render("polls_show", {
-      pollData
-    });
+
+    res.render("polls_show", {pollData});
+
     // res.render("polls_show", {pollQ});
   });
 });
+
+//GET - userPolls
+app.get("admin/polls/all", (req, res) => {
+  res.render("userpolls");
+})
+
+
+
+
+
 
 
 
