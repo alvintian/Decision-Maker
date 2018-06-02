@@ -101,7 +101,7 @@ module.exports = (knex) => {
     // .insert(insertoption2).into('option')
 
     .then((results) => {
-      res.redirect(`/polls/${pollurlID}`);
+      res.redirect(`/polls/thankyou/${pollurlID}`);
 
     });
   });

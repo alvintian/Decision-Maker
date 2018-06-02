@@ -8,16 +8,19 @@
   </head>
 
   <body>
-    <h1>Your Poll</h1>
-
-
+    <h1>Thank you for creating a poll</h1>
+    <p>You're on your way to making a great decision</p>
 <ul>
-  <li>Poll to send to your friends: </li>
-  <li>Results page: http://localhost:8080/<%=urls["poll_url"]%> </li>
-  <li>See all your polls: http://localhost:8080/<%=urls["admin_url"]%></li>
-  <li>Email to your friends: </li>
+  <li>See your poll <a href='http://localhost:8080/<%=urls["poll_url"]%>'>here</a>, and send to your friends so you can make the best decision!</li>
+  <li>See your results page<a href='http://localhost:8080/<%=urls["admin_url"]%>'>here</a>. It will update with new results as your friends answer the poll</li>
+  <li>See all your polls <a href="http://localhost:8080/admin/polls/all">here</a></li>
+  <li>Email to your friends ... Email address to pull for email... <%=urls["email"]%></li>
+  </ul>
+  <form>
+  <button>Email to your friends</button>
+</form>
 
-</ul>
+
 
 
   </body>

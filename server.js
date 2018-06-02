@@ -48,6 +48,15 @@ const deletePoll = require("./public/scripts/deletePoll")(knex);
 const queryOptions = require("./public/scripts/queryOptions")(knex);
 const findPollConf = require("./public/scripts/findPollConf")(knex);
 
+//Gmail server setup
+// Outgoing Mail (SMTP) Server: smtp.gmail.com
+// Use Authentication: Yes
+// Use Secure Connection: Yes
+// Username: manydecisions@gmail.com
+// Password: Lighthouselabs
+// Port: 465
+
+
 
 
 app.get("/", (req, res) => {
@@ -67,10 +76,11 @@ findPollConf.findPollUrls(pollURL, (err, rows) => {
     }
     var urls = rows[0];
 
-    console.log(urls["poll_url"]);
+    // console.log(urls["poll_url"]);
     // console.log(`successfully found: ${rows}`);
 
     res.render("thankyou", {urls});
+
 });
 });
 
