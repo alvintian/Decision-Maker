@@ -59,7 +59,8 @@ app.get("/", (req, res) => {
 // GET - confirmation page - displaying the two urls to share with friends - db query for urls
 app.get("/polls/thankyou/:id", (req, res) => {
   var pollURL = `polls/${req.params.id}`;
-findPollConf.findPollUrls(pollURL, (err, rows) => {
+  console.log(findPollConf, "eeeeeeeeeee",pollURL, "test");
+  findPollConf.findPollUrls(pollURL, (err, rows) => {
     if (err) {
       console.log("error finding poll data");
       res.status(500).send()
@@ -67,31 +68,33 @@ findPollConf.findPollUrls(pollURL, (err, rows) => {
     var urls = rows[0];
     console.log(urls["email"]);
 
- var sendEmail = require('gmail-send')({
-//var send = require('../index.js')({
-  user: 'manydecisions@gmail.com',
-  // user: credentials.user,                  // Your GMail account used to send emails
-  pass: 'hcrp kpco nbyt xphz',
-  // pass: credentials.pass,                  // Application-specific password
-  to:   [`${urls["email"]}`, 'chandesrochers@gmail.com'],
-  // to:   credentials.user,                  // Send to yourself
-                                      // you also may set array of recipients:
-                                           // [ 'user1@gmail.com', 'user2@gmail.com' ]
-  // from:    credentials.user,            // from: by default equals to user
-  // replyTo: credentials.user,            // replyTo: by default undefined
-  // bcc: 'some-user@mail.com',            // almost any option of `nodemailer` will be passed to it
-  subject: `Your Poll ${urls["poll_question"]} is ready!`,
-  text:    `Thank you for submitting a poll. You can send the following link to your friends: http://localhost:8080/${urls["poll_url"]}. To view the results of your poll, visit this link: http://localhost:8080/${urls["admin_url"]}`,         // Plain text
-  //html:    '<b>html text</b>'            // HTML
-});
+    var sendEmail = require('gmail-send')({
+      //var send = require('../index.js')({
+      user: 'manydecisions@gmail.com',
+      // user: credentials.user,                  // Your GMail account used to send emails
+      pass: 'hcrp kpco nbyt xphz',
+      // pass: credentials.pass,                  // Application-specific password
+      to: [`${urls["email"]}`, 'chandesrochers@gmail.com'],
+      // to:   credentials.user,                  // Send to yourself
+      // you also may set array of recipients:
+      // [ 'user1@gmail.com', 'user2@gmail.com' ]
+      // from:    credentials.user,            // from: by default equals to user
+      // replyTo: credentials.user,            // replyTo: by default undefined
+      // bcc: 'some-user@mail.com',            // almost any option of `nodemailer` will be passed to it
+      subject: `Your Poll "${urls["poll_question"]}" is ready!`,
+      text: `Thank you for submitting a poll. You can send the following link to your friends: http://localhost:8080/${urls["poll_url"]}. To view the results of your poll, visit this link: http://localhost:8080/${urls["admin_url"]}`, // Plain text
+      //html:    '<b>html text</b>'            // HTML
+    });
     // console.log(urls["poll_url"]);
     // console.log(`successfully found: ${rows}`);
-sendEmail();
+    sendEmail();
 
 
-    res.render("thankyou", {urls});
+    res.render("thankyou", {
+      urls
+    });
 
-});
+  });
 });
 
 //GET - userPolls - all polls associated with one poll
@@ -108,7 +111,7 @@ app.get("/admin/polls/:id", (req, res) => {
       res.status(500).send()
     }
     // console.log(rows);
-      var pollResults = {
+    var pollResults = {
       pollQuestion: rows[0]["poll_question"],
       options: rows.map(function(e) {
         return e["choice_description"];
@@ -118,12 +121,11 @@ app.get("/admin/polls/:id", (req, res) => {
       })
     };
     console.log(pollResults);
-    res.render("results", {pollResults});
+    res.render("results", {
+      pollResults
+    });
   })
 });
-
-
-
 
 
 
@@ -148,14 +150,19 @@ app.get("/polls/:id", (req, res) => {
     }
     console.log(pollData);
 
-    res.render("poll", {pollData});
+    res.render("poll", {
+      pollData
+    });
 
     // res.render("polls_show", {pollQ});
   });
 });
 
 
-
+// GET - userPolls - all polls associated with one poll
+app.get("admin/polls/all", (req, res) => {
+  res.render("userpolls");
+});
 
 
 

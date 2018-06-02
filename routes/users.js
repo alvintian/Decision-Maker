@@ -6,66 +6,45 @@ var app = express();
 
 module.exports = (knex) => {
 
-    router.get("/", (req, res) => {
-      knex
-        .select("*")
-        .from("users")
-        .then((results) => {
-          res.json(results);
-        });
-    });
+  router.get("/", (req, res) => {
+    knex
+      .select("*")
+      .from("users")
+      .then((results) => {
+        res.json(results);
+      });
+  });
 
-    function generateRandomString() {
-      var randomString = "";
-      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-      for (var i = 0; i < 6; i++) {
-        randomString += possible.charAt(Math.floor(Math.random() * possible.length));
-      }
-      return randomString;
+  function generateRandomString() {
+    var randomString = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for (var i = 0; i < 6; i++) {
+      randomString += possible.charAt(Math.floor(Math.random() * possible.length));
     }
-<<<<<<< HEAD
-    router.post('/', (req, res) => {
-      let pollurlID = generateRandomString();
-      let insertuser = {
-        name: req.body.name,
-        email: req.body.email
-      };
-      let insertpoll = {
-        poll_question: req.body.question,
-        poll_url: `polls/${pollurlID}`,
-        admin_url: `admin/polls/${pollurlID}`,
-      };
-      let insertoption = [];
-      for (let x in req.body) {
-        if (String(x) !== "name" && String(x) !== "email" && String(x) !== "question") {
-          insertoption.push({
-            choice_description: req.body[x]
-          })
-        }
-      }
-      knex
-        .insert(insertuser).into('users').returning('id')
-        .then(response =>
-          knex.insert({
-            poll_question: req.body.question,
-            user_id_fk: response[0],
-            poll_url: `polls/${pollurlID}`,
-            admin_url: `admin/polls/${pollurlID}`
-          }).into('poll').returning('poll_id'))
-        .then(function(response) {
-          return knex('option')
-            .insert(insertoption.map(a => Object.assign(a, {
-              score: 0
-            }, {
-              poll_id_fk: response[0]
-            })))
+    return randomString;
+  }
+  //document.getelementsByClassName('.empty').length
+  router.post('/', (req, res) => {
+
+    let pollurlID = generateRandomString();
+    let insertuser = {
+      name: req.body.name,
+      email: req.body.email
+    };
+    let insertpoll = {
+      poll_question: req.body.question,
+      poll_url: `polls/${pollurlID}`,
+      admin_url: `admin/polls/${pollurlID}`,
+      //      user_id: req:b
+    };
+    let insertoption = [];
+    for (let x in req.body) {
+      if (String(x) !== "name" && String(x) !== "email" && String(x) !== "question") {
+        insertoption.push({
+          choice_description: req.body[x]
         })
-        .then((results) => {
-          res.redirect(`/polls/${pollurlID}`);
-        });
-    });
-    router.post('/result', (req, res) => {
-=======
+      }
+    }
     //      if (req.body.hasOwnProperty(x))
     // let count = -3;
 
@@ -104,7 +83,6 @@ module.exports = (knex) => {
     });
 
    router.post('/result', (req, res) => {
->>>>>>> 501d968c3c6f62ec1b2813e8bf4724c338fb1bc5
         let updatechoice = [];
         let updatescore = [];
         let matchX = [];
@@ -142,23 +120,7 @@ module.exports = (knex) => {
             res.json(response);
           })
         })
-<<<<<<< HEAD
-      //   let insertScore = {score:req.body.score};
-      //   knex
-      //     .insert(insertScore).into('users').returning('id')
-      //     .then(response =>
-      //       knex.insert({
-      //         poll_question: req.body.question,
-      //         user_id_fk: response[0],
-      //         poll_url: `polls/${pollurlID}`,
-      //         admin_url: `admin/polls/${pollurlID}`
-      //       }).into('poll').returning('poll_id'))
-      // })
-      return router;
-    }
-=======
 
 
   return router;
 }
->>>>>>> 501d968c3c6f62ec1b2813e8bf4724c338fb1bc5
