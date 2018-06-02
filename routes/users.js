@@ -23,6 +23,7 @@ module.exports = (knex) => {
       }
       return randomString;
     }
+<<<<<<< HEAD
     router.post('/', (req, res) => {
       let pollurlID = generateRandomString();
       let insertuser = {
@@ -64,6 +65,46 @@ module.exports = (knex) => {
         });
     });
     router.post('/result', (req, res) => {
+=======
+    //      if (req.body.hasOwnProperty(x))
+    // let count = -3;
+
+    //     ++count;
+    // insertoption.push({choice_description: req.body.op+});
+
+    // console.log(req.body, "users.js");
+    // if (!req.body.text) {
+    //  res.status(400).json({
+    //    error: 'invalid request: no data in POST body'
+    //  });
+    //  return;
+    // }
+    knex
+      .insert(insertuser).into('users').returning('id')
+      //  .('poll').insert('req.body.question')
+      .then(response =>
+        knex.insert({
+          poll_question: req.body.question,
+          user_id_fk: response[0],
+          poll_url: `polls/${pollurlID}`,
+          admin_url: `admin/polls/${pollurlID}`
+        }).into('poll').returning('poll_id'))
+
+    //    .insert(insertpoll).into('poll').select('req.body.question', id).from('users')
+
+    .then(function(response) {
+      return knex('option')
+        .insert(insertoption.map(a => Object.assign(a, {score:0},{
+          poll_id_fk: response[0]
+        })))
+    })
+    .then((results) => {
+         res.redirect(`/polls/thankyou/${pollurlID}`);
+        });
+    });
+
+   router.post('/result', (req, res) => {
+>>>>>>> 501d968c3c6f62ec1b2813e8bf4724c338fb1bc5
         let updatechoice = [];
         let updatescore = [];
         let matchX = [];
@@ -101,6 +142,7 @@ module.exports = (knex) => {
             res.json(response);
           })
         })
+<<<<<<< HEAD
       //   let insertScore = {score:req.body.score};
       //   knex
       //     .insert(insertScore).into('users').returning('id')
@@ -114,3 +156,9 @@ module.exports = (knex) => {
       // })
       return router;
     }
+=======
+
+
+  return router;
+}
+>>>>>>> 501d968c3c6f62ec1b2813e8bf4724c338fb1bc5

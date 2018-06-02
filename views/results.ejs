@@ -31,7 +31,7 @@
 
 <div class="container">
 
- <h1>USERNAME QUESTION <%=pollResults["options"][1]%></h1>
+ <h1><%=pollResults["pollQuestion"]%></h1>
  <div>
    <canvas id="myChart"></canvas>
  </div>
@@ -63,14 +63,6 @@ var myChart = new Chart(ctx, {
    }]
  }
 });
-// pollResults["options"].forEach(function(opt) {
-//   console.log(opt);
-// });
-
-// console.log(<%pollResults["options"]%>);
-// console.log(<%pollResults["scores"]%>);
-// console.log(<%=pollResults["scores"]%>);
-// console.log(<%=pollResults["scores"]%>);
 
 function addData(chart, label, data) {
    chart.data.labels.push(label);

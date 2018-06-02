@@ -9,8 +9,8 @@
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 </head>
 <div id="tes"><%=pollData["options"].length%></div>
-<div id="tes"><%=pollID%></div>
-<body>
+<!-- <div id="tes"><%=pollID%></div>
+ --><body>
   <h1 class="question"><%=pollData.pollQuestion%></h1>
   <div class='circle-container' id='rails' ondrop="drop(event, this)" ondragover="allowDrop(event)">
     <% pollData["options"].forEach(function (option) { %>
@@ -26,22 +26,4 @@
   <script type="text/javascript" src="/scripts/retrieve-option.js"></script>
 
 </body>
-    <style> h1{
-   color: #AF80ED;
-}
-
-h3{
-   color: #DE5E85;
-}</style>
-  </head>
-
-  <body>
-   <h1>Poll question: <%=pollData["pollQuestion"]%></h1>
-    <ul>
-        <% pollData["options"].forEach(function(opt) { %>
-
-            <li> <%=opt %>  </li>
-            <% }); %>
-    </ul>
-  </body>
 </html>
