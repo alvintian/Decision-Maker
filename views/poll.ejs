@@ -18,6 +18,7 @@
     <% }) %>
   </div>
   <form action="/api/users/result" method="POST" id="hide" onsubmit="countScore()" class="submit_box">
+    <input type="hidden" value="<%=pollData['pollID']%>" name="pollid">
   <input type="submit" value="submits" name="submit_button">
   </form>
   <div class="box" id="boxy" ondrop="drop(event, this)" ondragover="allowDrop(event)"></div>
@@ -26,5 +27,4 @@
   <script type="text/javascript" src="/scripts/retrieve-options.js"></script>
 
 </body>
-
 </html>

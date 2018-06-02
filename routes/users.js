@@ -87,8 +87,12 @@ module.exports = (knex) => {
         let updatescore = [];
         let matchX = [];
         let superX = [];
+        let pollid=0;
         for (let x in req.body) {
-          if (String(x) !== "submit_button") {
+          if(String(x) === "pollid" ){
+        pollid=req.body[x];
+          }
+          if (String(x) !== "submit_button" && String(x) !== "pollid" ) {
             updatechoice.push({
               choice_description: x
             })
@@ -99,10 +103,10 @@ module.exports = (knex) => {
             superX.push(req.body[x]);
           }
         }
-        let loopyloop = [];
+
         for (let i = 0; i < updatescore.length; i++) {
           let loopy = knex('option').increment('score', parseInt(superX[i])).
-          where({poll_id_fk: 3,choice_description: matchX[i]});
+          where({poll_id_fk: pollid,choice_description: matchX[i]});
           loopyloop.push(loopy);
         }
         //            for (let x in req.body) {
@@ -118,9 +122,11 @@ module.exports = (knex) => {
           }));
           Promise.all(loopyloop).then(response => {
             res.json(response);
+        //   })
+        // })
+
           })
+          res.redirect('/admin/polls/all');
         })
-
-
   return router;
 }

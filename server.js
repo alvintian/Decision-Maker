@@ -1,5 +1,4 @@
 "use strict";
-
 require('dotenv').config();
 
 const PORT = process.env.PORT || 8080;
@@ -163,7 +162,6 @@ app.get("/polls/:id", (req, res) => {
 app.get("admin/polls/all", (req, res) => {
   res.render("userpolls");
 });
-
 
 
 // });
