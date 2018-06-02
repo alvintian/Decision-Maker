@@ -68,7 +68,6 @@ app.get("/polls/thankyou/:id", (req, res) => {
     var urls = rows[0];
     console.log(urls["email"]);
 
-<<<<<<< HEAD
     var sendEmail = require('gmail-send')({
       //var send = require('../index.js')({
       user: 'manydecisions@gmail.com',
