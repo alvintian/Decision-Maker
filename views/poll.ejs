@@ -26,4 +26,22 @@
   <script type="text/javascript" src="/scripts/retrieve-option.js"></script>
 
 </body>
+    <style> h1{
+   color: #AF80ED;
+}
+
+h3{
+   color: #DE5E85;
+}</style>
+  </head>
+
+  <body>
+   <h1>Poll question: <%=pollData["pollQuestion"]%></h1>
+    <ul>
+        <% pollData["options"].forEach(function(opt) { %>
+
+            <li> <%=opt %>  </li>
+            <% }); %>
+    </ul>
+  </body>
 </html>

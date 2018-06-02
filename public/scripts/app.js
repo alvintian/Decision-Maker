@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 $(() => {
   //Jquery to compile options into an object to export to database
   // on submit, grab object, stringify it and set val of hidden field with it
@@ -6,6 +7,7 @@ $(() => {
   var max_fields = 6
   var x = 2;
   $("#button").click(function() {
+
     var name = 'Option';
     if (x < max_fields) {
       x++;
@@ -36,6 +38,26 @@ $(() => {
   //    //  $("#results").append(field.value + " ");
   //    // });
   // });
+ // $('.empty').on("click",".remove_field", function(e){
+ //        e.preventDefault(); $(this).parent('div').remove(); x--;
+ //    })
+
+
+  // $("#emailButton").on("click", function(e) {
+  //   sendEmail();
+  // });
+
+  // $("#emailButton").on("click", function() {
+  //   alert("clicked the button!");
+  //   // event.preventDefault();
+  //   // sendEmail();
+  // });
+
+// $( window ).load(function() {
+// $("#button").click(function(){
+//         $("#new_choice").fadeIn(4000);
+// });
+// });
 
   // $submission.on('click', function() {
   //  tweet.count = parseInt(tweet.count) + 1;

@@ -114,23 +114,3 @@ module.exports = (knex) => {
       // })
       return router;
     }
-
-    // knex('option').max('poll_id_fk')
-    //   .then(function(x) {
-    //     console.log(x[0].max)
-    //     // for (let i = 0; i < updatescore.length; i++) {
-    //     //   let loopy = knex('option').increment('score', parseInt(superX[i])).
-    //     //   where('choice_description', matchX[i]).andWhere('poll_id_fk', x[0].max);
-    //     //   console.log(loopy)
-    //     //   loopyloop.push(loopy);
-    //     // }
-    //     for (let i = 0; i < updatescore.length; i++) {
-    //       return knex('option').increment('score', parseInt(superX[i])).
-    //       where('choice_description', matchX[i]).andWhere('poll_id_fk', x[0].max)
-
-
-    //     }
-    //   })
-    //   .then(response => {
-    //     res.json(response);
-    //   })
