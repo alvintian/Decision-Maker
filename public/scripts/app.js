@@ -1,7 +1,21 @@
-$(() => {
+$(document).ready(function() {
 //Jquery to compile options into an object to export to database
 // on submit, grab object, stringify it and set val of hidden field with it
 //adding JQUERY to increase the amount of options a user can have per decision
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 var id = 3;
 var max_fields = 6
@@ -25,6 +39,7 @@ $( "#button" ).click(function() {
 
 
 
+
 $("form").submit(function() {
 
   if ($.trim($("#usr").val()) === "") {
@@ -37,6 +52,7 @@ $("form").submit(function() {
 
 
 });
+
 // $( window ).load(function() {
 // $("#button").click(function(){
 //         $("#new_choice").fadeIn(4000);
