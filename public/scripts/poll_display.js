@@ -3,19 +3,30 @@ var ctx = document.getElementById("myChart").getContext('2d');
 var myChart = new Chart(ctx, {
   type: 'doughnut',
   data: {
-    labels: ["M", "T", "W", "T", "F", "S", "S"],
+    labels: [ ],
     datasets: [{
       backgroundColor: [
-        "#2ecc71",
-        "#3498db",
+        "#0060B2",
+        "#FF9C00",
         "#95a5a6",
         "#9b59b6",
         "#f1c40f",
         "#e74c3c",
         "#34495e"
       ],
-      data: [12, 19, 3, 17, 28, 24, 7]
+      data: []
     }]
   }
 });
+
+function addData(chart, label, data) {
+    chart.data.labels.push(label);
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.push(data);
+    });
+    chart.update();
+}
+addData(myChart, labels, data);
+
+
 

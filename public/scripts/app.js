@@ -20,9 +20,23 @@ $( "#button" ).click(function() {
 
 
  $('.empty').on("click",".remove_field", function(e){
-        e.preventDefault(); $(this).parent('div').remove(); x--;
+        event.preventDefault(); $(this).parent('div').remove(); x--;
     })
 
+
+
+$("form").submit(function() {
+
+  if ($.trim($("#usr").val()) === "") {
+        alert('You did not fill out either of the options');
+        event.preventDefault()
+}
+});
+
+
+
+
+});
 // $( window ).load(function() {
 // $("#button").click(function(){
 //         $("#new_choice").fadeIn(4000);
@@ -63,4 +77,4 @@ $( "#button" ).click(function() {
 //adding Js to implement a doughnut graph needs to able to take data from database
 
 
-});
+

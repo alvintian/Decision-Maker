@@ -7,13 +7,12 @@ margin-bottom:0px;
 text-align: center;
 width:100%;
 color:white;
-height:100px;
+
+display:inline-block;
 
 }
 
-.container-fluid{
-height:60px;
-}
+
 
 .brand{
 float:none;
@@ -52,7 +51,9 @@ float:right;
 }
 
 
-
+.profile_pic {
+  display: inline;
+}
 
 
 .form-group{

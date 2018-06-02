@@ -110,10 +110,10 @@ app.get("/polls/:id", (req, res) => {
   });
 });
 
-// //GET - userPolls - all polls associated with one poll
-// app.get("admin/polls/all", (req, res) => {
-//   res.render("userpolls");
-// });
+// GET - userPolls - all polls associated with one poll
+app.get("admin/polls/all", (req, res) => {
+  res.render("userpolls");
+});
 
 // //GET - confirmation page - displaying the two urls to share with friends - db query for urls
 // app.get("polls/thankyou/:id", req, res) => {
