@@ -38,23 +38,6 @@ $( "#button" ).click(function() {
     })
 
 
-  // $("#emailButton").on("click", function(e) {
-  //   sendEmail();
-  // });
-
-  // $("#emailButton").on("click", function() {
-  //   alert("clicked the button!");
-  //   // event.preventDefault();
-  //   // sendEmail();
-  // });
-
-// $( window ).load(function() {
-// $("#button").click(function(){
-//         $("#new_choice").fadeIn(4000);
-// });
-// });
-
-
 
  //  $(".tester").on("click", function() {
  //  let submission = $("form[class='info_input']").serialize();
