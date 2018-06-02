@@ -162,7 +162,8 @@ app.get("/polls/:id", (req, res) => {
       pollQuestion: rows[0]["poll_question"],
       options: rows.map(function(e) {
         return e["choice_description"];
-      })
+      }),
+      pollID: rows[0]["poll_id_fk"]
     }
     console.log(pollData);
 
@@ -171,6 +172,8 @@ app.get("/polls/:id", (req, res) => {
     // res.render("polls_show", {pollQ});
   });
 });
+
+
 
 
 
