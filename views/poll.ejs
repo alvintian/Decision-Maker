@@ -1,31 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Home Page</title>
-    <link rel="stylesheet" href="/styles/test.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
-        <script type="text/javascript" src="/scripts/retrieve-option.js"></script>
-  </head>
+<head>
+  <title>Polling</title>
 
-  <body>
-    <h1>Hello poll!</h1>
+  <link rel="stylesheet" href="/styles/test.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+</head>
+<div id="tes"><%=pollData["options"].length%></div>
+<div id="tes"><%=pollID%></div>
+<body>
+  <h1 class="question"><%=pollData.pollQuestion%></h1>
+  <div class='circle-container' id='rails' ondrop="drop(event, this)" ondragover="allowDrop(event)">
+    <% pollData["options"].forEach(function (option) { %>
+    <div class='option'><%=option%></div>
+    <% }) %>
+  </div>
+  <form action="/api/users/result" method="POST" id="hide" onsubmit="countScore()" class="submit_box">
+  <input type="submit" value="submits" name="submit_button">
+  </form>
+  <div class="box" id="boxy" ondrop="drop(event, this)" ondragover="allowDrop(event)"></div>
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+  <script type="text/javascript" src="/scripts/retrieve-option.js"></script>
 
-<div class="ttt">wawaaaaaaaaaaaa</div>
-<ul class='circle-container'>
-  <li class="option" id="one"><img src='http://images.all-free-download.com/images/graphiclarge/harry_potter_icon_6825007.jpg'></li>
-    <li class="option" id="two">aflkweflekj</li>
-      <li class="option" id="three"><img src='images/rrr.png'></li>
-        <li class="option" id="four"><img src='images/ttt.png'></li>
-      <li class="option" id="five"><img src='images/eee.png'></li>
-</ul>
-<div class="box"></div>
-      <form action="/poll/:id" method="POST" class="submit_box">
-       <input type="submit" value="submits" name="submit_button">
-     </form>
-
-  </body>
+</body>
 </html>
