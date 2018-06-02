@@ -174,6 +174,13 @@ app.get("/polls/:id", (req, res) => {
 });
 
 
+// GET - userPolls - all polls associated with one poll
+app.get("admin/polls/all", (req, res) => {
+  res.render("userpolls");
+});
+
+
+
 
 
 

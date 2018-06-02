@@ -34,19 +34,24 @@ $( "#button" ).click(function() {
 
 
  $('.empty').on("click",".remove_field", function(e){
-        e.preventDefault(); $(this).parent('div').remove(); x--;
+        event.preventDefault(); $(this).parent('div').remove(); x--;
     })
 
 
-  // $("#emailButton").on("click", function(e) {
-  //   sendEmail();
-  // });
 
-  // $("#emailButton").on("click", function() {
-  //   alert("clicked the button!");
-  //   // event.preventDefault();
-  //   // sendEmail();
-  // });
+
+$("form").submit(function() {
+
+  if ($.trim($("#usr").val()) === "") {
+        alert('You did not fill out either of the options');
+        event.preventDefault()
+}
+});
+
+
+
+
+});
 
 // $( window ).load(function() {
 // $("#button").click(function(){
@@ -88,4 +93,4 @@ $( "#button" ).click(function() {
 //adding Js to implement a doughnut graph needs to able to take data from database
 
 
-});
+
