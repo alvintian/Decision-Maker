@@ -77,33 +77,57 @@ module.exports = (knex) => {
           poll_id_fk: response[0]
         })))
     })
-
-    // [{
-    //         choice_description: req.body.op1,
-    //         poll_id_fk: response[0]
-    //       }, {
-    //         choice_description: req.body.op2,
-    //         poll_id_fk: response[0]
-    //       }]
-    // .then(function(response) {
-    //  return knex('option')
-    //    .insert({
-    //      choice_description: req.body.op2,
-    //      poll_id: response[0]
-    //    })
-    // })
-
-    //      from("pollToSelectDataFrom")).into("users")
-
-    // .insert(insertpoll).into('poll').select('req.body.question', id).from('users')
-    //  .where('name').equals(req.body.name);
-    // .insert(insertoption).into('option')
-    // .insert(insertoption2).into('option')
-
     .then((results) => {
-      res.redirect(`/polls/thankyou/${pollurlID}`);
-
+         res.redirect(`/polls/thankyou/${pollurlID}`);
+        });
     });
-  });
+
+   router.post('/result', (req, res) => {
+        let updatechoice = [];
+        let updatescore = [];
+        let matchX = [];
+        let superX = [];
+        let pollid=0;
+        for (let x in req.body) {
+          if(String(x) === "pollid" ){
+        pollid=req.body[x];
+          }
+          if (String(x) !== "submit_button" && String(x) !== "pollid" ) {
+            updatechoice.push({
+              choice_description: x
+            })
+            updatescore.push({
+              score: req.body[x]
+            })
+            matchX.push(x);
+            superX.push(req.body[x]);
+          }
+        }
+        console.log(req.body);
+        let loopyloop = [];
+        for (let i = 0; i < updatescore.length; i++) {
+          let loopy = knex('option').increment('score', parseInt(superX[i])).
+          where({poll_id_fk: pollid,choice_description: matchX[i]});
+          loopyloop.push(loopy);
+        }
+        //            for (let x in req.body) {
+        //             if (String(x) !== "submit_button") {
+        //       console.log(req.body[x], x);
+        // knex.raw(update option set score = case(choice_description when superX[i])
+        //   updatescore where updatechoice)
+        //      knex.raw(update option set score = score + superX[i] where )
+        //       .update(updatescore[0])
+        console.log(loopyloop.map(function(e) {
+            return
+            e.toString();
+          }));
+          Promise.all(loopyloop).then(response => {
+            res.json(response);
+
+          })
+          res.redirect('/admin/polls/all');
+        })
+
+
   return router;
 }
