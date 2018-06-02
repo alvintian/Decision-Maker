@@ -92,15 +92,15 @@ findPollConf.findPollUrls(pollURL, (err, rows) => {
   // user: credentials.user,                  // Your GMail account used to send emails
   pass: 'hcrp kpco nbyt xphz',
   // pass: credentials.pass,                  // Application-specific password
-  to:   'urls["email"]',
+  to:   [`${urls["email"]}`, 'chandesrochers@gmail.com'],
   // to:   credentials.user,                  // Send to yourself
                                       // you also may set array of recipients:
                                            // [ 'user1@gmail.com', 'user2@gmail.com' ]
   // from:    credentials.user,            // from: by default equals to user
   // replyTo: credentials.user,            // replyTo: by default undefined
   // bcc: 'some-user@mail.com',            // almost any option of `nodemailer` will be passed to it
-  subject: 'Your Poll urls["poll_question"] is ready!',
-  text:    'Thank you for submitting a poll. You can send the following link to your friends: http://localhost:8080/<%=urls["poll_url"]. To view the results of your poll, visit this link: http://localhost:8080/<%=urls["admin_url"]',         // Plain text
+  subject: `Your Poll ${urls["poll_question"]} is ready!`,
+  text:    `Thank you for submitting a poll. You can send the following link to your friends: http://localhost:8080/${urls["poll_url"]}. To view the results of your poll, visit this link: http://localhost:8080/${urls["admin_url"]}`,         // Plain text
   //html:    '<b>html text</b>'            // HTML
 });
     // console.log(urls["poll_url"]);
