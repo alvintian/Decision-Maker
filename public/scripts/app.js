@@ -2,21 +2,6 @@ $(document).ready(function() {
 //Jquery to compile options into an object to export to database
 // on submit, grab object, stringify it and set val of hidden field with it
 //adding JQUERY to increase the amount of options a user can have per decision
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 var id = 3;
 var max_fields = 6
 var x = 2;
@@ -25,19 +10,15 @@ $( "#button" ).click(function() {
     if(x < max_fields) {
     x++;
 
-
-    $('.empty').append('<div class="new_choice"><label for="'+id+'">'+name+':</label><input type="text" class="new form-control" name="op'+id+'"><a href="#" class="remove_field">Remove</a></div>')
+    $('.empty').append('<div class="new_choice"><label for="'+id+'">'+name+':</label><input type="text" class="new form-control" name="op'+id+'"><input type="file" id="photo'+id+'" name="photo'+id+'" ><a href="#" class="remove_field">Remove</a></div>')
     id++;
+
 }
 
 });
-
-
  $('.empty').on("click",".remove_field", function(e){
         e.preventDefault(); $(this).parent('div').remove(); x--;
     })
-
-
 
  //  $(".tester").on("click", function() {
  //  let submission = $("form[class='info_input']").serialize();
@@ -69,6 +50,5 @@ $( "#button" ).click(function() {
   // });
 
 //adding Js to implement a doughnut graph needs to able to take data from database
-
 
 });

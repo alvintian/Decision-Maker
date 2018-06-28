@@ -7,24 +7,31 @@
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+<style>
+:root {
+    --element-dimen: 100/<%=pollData["options"].length%>;
+    --element-pic1: <%=pollData['pictures'][0]%>;
+}
+</style>
 </head>
-<div id="tes"><%=pollData["options"].length%></div>
-
+<div id="tes" class="debug"><%=pollData["options"].length%></div>
+<div id="pic1" class="debug"><%=pollData['pictures'][0]%></div>
 <body>
   <h1 class="question"><%=pollData.pollQuestion%></h1>
-  <div class='circle-container' id='rails' ondrop="drop(event, this)" ondragover="allowDrop(event)">
+    <%let i=0%>
+  <div class='left-container' id='leftrails' ondrop="drop(event, this)" ondragover="allowDrop(event)">
     <% pollData["options"].forEach(function (option) { %>
-    <div class='option'><%=option%></div>
-    <% }) %>
-  </div>
+    <div class='option' style="background-image: url(../styles/images/<%= pollData['pictures'][i]%>)"><%=option%></div>
+    <% i++ %>
+    <% }) %></div>
+
+  <div class="box" id="boxy" ondrop="drop(event, this)" ondragover="allowDrop(event)"></div>
+  <div class='right-container' id='rightrails' ondrop="drop(event, this)" ondragover="allowDrop(event)"></div>
   <form action="/api/users/result" method="POST" id="hide" onsubmit="countScore()" class="submit_box">
     <input type="hidden" value="<%=pollData['pollID']%>" name="pollid">
-  <input type="submit" value="submits" name="submit_button">
+  <input type="submit" value="Vote" name="submit_button" class="debug" id="sneak">
   </form>
-  <div class="box" id="boxy" ondrop="drop(event, this)" ondragover="allowDrop(event)"></div>
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-  <script type="text/javascript" src="/scripts/app.js"></script>
   <script type="text/javascript" src="/scripts/retrieve-options.js"></script>
-
 </body>
 </html>

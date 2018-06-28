@@ -42,6 +42,7 @@ function createPollTable() {
     return knex.schema.createTable('option', table => {
       table.increments('option_id').primary()
       table.string('choice_description')
+      table.string('choice_picture')
       table.integer('score')
       table.integer('poll_id_fk').unsigned()
       table.foreign('poll_id_fk').references('poll_id').inTable('poll');

@@ -58,7 +58,7 @@ app.get("/", (req, res) => {
 // GET - confirmation page - displaying the two urls to share with friends - db query for urls
 app.get("/polls/thankyou/:id", (req, res) => {
   var pollURL = `polls/${req.params.id}`;
-  console.log(findPollConf, "eeeeeeeeeee",pollURL, "test");
+  console.log(findPollConf, "eeeeeeeeeee", pollURL, "test");
   findPollConf.findPollUrls(pollURL, (err, rows) => {
     if (err) {
       console.log("error finding poll data");
@@ -81,7 +81,7 @@ app.get("/polls/thankyou/:id", (req, res) => {
       // replyTo: credentials.user,            // replyTo: by default undefined
       // bcc: 'some-user@mail.com',            // almost any option of `nodemailer` will be passed to it
       subject: `Your Poll "${urls["poll_question"]}" is ready!`,
-      text: `Thank you for submitting a poll. You can send the following link to your friends: http://localhost:8080/${urls["poll_url"]}. To view the results of your poll, visit this link: http://localhost:8080/${urls["admin_url"]}`, // Plain text
+      text: `Thank you for submitting a poll. You can send the following link to your friends: http://localhost:8080/${urls["poll_url"]} . To view the results of your poll, visit this link: http://localhost:8080/${urls["admin_url"]}`, // Plain text
       //html:    '<b>html text</b>'            // HTML
     });
     // console.log(urls["poll_url"]);
@@ -138,16 +138,20 @@ app.get("/polls/:id", (req, res) => {
       res.status(500).send()
 
     }
-    // console.log(rows);
+    console.log(rows, "what is rows?");
     // console.log(rows[0]["poll_question"]);
     var pollData = {
       pollQuestion: rows[0]["poll_question"],
+      //      pollDesc: rows[0]["question_description"],
       options: rows.map(function(e) {
         return e["choice_description"];
       }),
+      pictures: rows.map(function(e) {
+        return e["choice_picture"];
+      }),
       pollID: rows[0]["poll_id_fk"]
     }
-    console.log(pollData);
+    console.log(pollData,"my datas");
 
     res.render("poll", {
       pollData

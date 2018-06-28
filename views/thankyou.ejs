@@ -3,18 +3,27 @@
 <link rel="stylesheet" href="/styles/thankyoupage.css" type="text/css"/>
 
   <body>
-    <h1>Thank you for creating a poll</h1>
-    <h2>You're on your way to making a great decision</h2>
-    <div class="nextsteps">
-<h3>Check your inbox for an email from Decision, Decisions</h3>
-  <p>See your poll <a href='http://localhost:8080/<%=urls["poll_url"]%>'>here</a>, and send to your friends so you can make the best decision!</p>
-  <p>See your results page<a href='http://localhost:8080/<%=urls["admin_url"]%>'>here</a>. It will update with new results as your friends answer the poll</p>
-  <p>See all your polls <a href="http://localhost:8080/admin/polls/all">here</a></p>
+
+
+<div class="nextsteps">
+    <h1>Thank you for creating a poll !</h1>
+    <h2>
+    You're on your way to making a great decision
+    </h2>
+
+<ul>
+  <h3>See your poll <br><a href='http://localhost:8080/<%=urls["poll_url"]%>'>here</a></h3>
+  <h3>See your results page <br><a href='http://localhost:8080/<%=urls["admin_url"]%>'>here</a><br> This poll will update overtime depending on <br> how many people vote</h3>
+
+  <h3>You will recieve an email shortly with links to allow your firends to vote as well as view the results of your poll:<br> <%=urls["email"]%></h3>
+  </ul>
+  <form>
+    <div class="emailsurround">
+   <button type="submit" class="btn btn-primary btn-md">E-MAIL YOUR FRIENDS</button>
 </div>
 </form>
 </div>
 
   </body>
-
+  <!-- <script type="text/javascript" src="/scripts/nodemailer.js"></script> -->
 </html>
- 
