@@ -69,11 +69,12 @@ app.get("/polls/thankyou/:id", (req, res) => {
 
     var sendEmail = require('gmail-send')({
       //var send = require('../index.js')({
-      user: 'manydecisions@gmail.com',
+      user: process.env.GMAIL_USER,
       // user: credentials.user,                  // Your GMail account used to send emails
-      pass: 'hcrp kpco nbyt xphz',
+      pass: process.env.GMAIL_PASS,
       // pass: credentials.pass,                  // Application-specific password
-      to: [`${urls["email"]}`, 'chandesrochers@gmail.com'],
+//      to: [`${urls["email"]}`, 'chandesrochers@gmail.com'],
+      to: [`${urls["email"]}`, process.env.EMAIL_USER],
       // to:   credentials.user,                  // Send to yourself
       // you also may set array of recipients:
       // [ 'user1@gmail.com', 'user2@gmail.com' ]

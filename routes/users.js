@@ -67,7 +67,7 @@ module.exports = (knex) => {
     let insertoption = [];
     if (req.files.length === 2) {
       console.log(typeof(req.files), "files exist.");
-      console.log(req.files.length, "file length");
+      console.log(req.files, "file names?");
       insertoption.push({
         choice_description: req.body.op1,
         choice_picture: req.files[0].filename
