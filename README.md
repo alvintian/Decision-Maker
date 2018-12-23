@@ -6,15 +6,15 @@ Install the dependencies and start the server.
 <br>
 `git clone git@github.com:alvintian/Decision-Maker.git`
 <br>
-npm install 
+`npm install`
 <br>
 connect to psql and provides all necessary infos through .env file:
 <br>
 DB_HOST,DB_USER,DB_PASS,DB_NAME,DB_SSL,DB_PORT,GMAIL_USER,GMAIL_PASS,EMAIL_USER
 <br>
-knex migrate:latest
+`knex migrate:latest`
 <br>
-npm start
+`npm start`
 <br>
 screenshot:
 <br>
